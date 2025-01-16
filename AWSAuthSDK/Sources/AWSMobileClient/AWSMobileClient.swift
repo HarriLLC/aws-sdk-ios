@@ -275,7 +275,7 @@ final public class AWSMobileClient: _AWSMobileClient {
     /**
      Swap Cached Data
      */
-    public func swapCachedData(name: String?, idToken: String, refreshToken: String, accessToken: String, expiryDate: Date?) {
+    func swapCachedData(name: String?, idToken: String, refreshToken: String, accessToken: String, expiryDate: Date?) {
         
         self.userpoolOpsHelper?.currentActiveUser?.setName(name)
         
@@ -312,7 +312,7 @@ final public class AWSMobileClient: _AWSMobileClient {
         
         self.internalCredentialsProvider?.clearCredentials()
         
-        self.swapeCachedData(name: session.getUserName, idToken: session.getIdToken, refreshToken: session.getRefreshToken, accessToken: session.getAccessToken, expiryDate: session.getExpiryDate)
+        self.swapCachedData(name: session.getUserName, idToken: session.getIdToken, refreshToken: session.getRefreshToken, accessToken: session.getAccessToken, expiryDate: session.getExpiryDate)
         
         self.federationProvider = .userPools
         self.performUserPoolSuccessfulSignInTasks(session: session.getAWSCognitoIdentityUserSession())
