@@ -19,7 +19,7 @@ import Foundation
 ///
 /// NOTE: If specified, some of the values in this type will override the corresponding values in `awsconfiguration.json`. See
 /// the `init` method below.
-public struct HostedUIOptions {
+public struct HostedUIOptions: Codable {
     let scopes: [String]?
 
     let identityProvider: String?
