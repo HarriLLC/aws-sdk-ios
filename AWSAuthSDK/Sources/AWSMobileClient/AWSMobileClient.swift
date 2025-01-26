@@ -360,13 +360,27 @@ final public class AWSMobileClient: _AWSMobileClient {
     }
     
     /**
-     Clea Current Credintials
+     Clear Current Credintials
      */
     public func clearCurrentCredintials() {
-        self.internalCredentialsProvider?.clearCredentials()
+        self.credentialsFetchCancellationSource.cancel()
+        if federationProvider == .hostedUI {
+            AWSCognitoAuth.init(forKey: AWSMobileClientConstants.CognitoAuthRegistrationKey).signOutLocallyAndClearLastKnownUser()
+        }
+        
         self.cachedLoginsMap = [:]
+        self.customRoleArnInternal = nil
+        self.setCustomRoleArnInternal(nil, for: self)
         self.saveLoginsMapInKeychain()
+        self.setLoginProviderMetadataAndSaveInKeychain(provider: .none)
+        self.internalCredentialsProvider?.identityProvider.identityId = nil
         self.internalCredentialsProvider?.clearKeychain()
+        self.mobileClientStatusChanged(userState: .signedOut, additionalInfo: [:])
+        self.federationProvider = .none
+        self.credentialsFetchCancellationSource = AWSCancellationTokenSource()
+        self.clearHostedUIOptionsScopesFromKeychain()
+        
+        self.internalCredentialsProvider?.clearCredentials()
         self.currentUserState = .signedOut
     }
     
