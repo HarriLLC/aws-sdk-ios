@@ -340,6 +340,8 @@ final public class AWSMobileClient: _AWSMobileClient {
         
         let session = authSession.getAWSCognitoAuthUserSession()
         
+        configureAndRegisterCognitoAuth(hostedUIOptions: hostedUIOptions, {_,_ in })
+        
         AWSCognitoAuth(forKey: AWSMobileClientConstants.CognitoAuthRegistrationKey).updateUsernameAndPersistTokens(session)
         
         self.scopes = hostedUIOptions.scopes
@@ -354,9 +356,8 @@ final public class AWSMobileClient: _AWSMobileClient {
         }
         
         self.performHostedUISuccessfulSignInTasks(disableFederation: hostedUIOptions.disableFederation, session: session, federationToken: federationToken, federationProviderIdentifier: hostedUIOptions.federationProviderName, signInInfo: &signInInfo)
-        self.mobileClientStatusChanged(userState: .signedIn, additionalInfo: signInInfo)
         
-        configureAndRegisterCognitoAuth(hostedUIOptions: hostedUIOptions, {_,_ in })
+        self.mobileClientStatusChanged(userState: .signedIn, additionalInfo: signInInfo)
     }
     
     /**
