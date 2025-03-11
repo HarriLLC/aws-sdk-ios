@@ -89,6 +89,27 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly, nullable) NSString * deviceIdentifier;
 
+/// get date formatter
+-(NSDateFormatter *) getDateFormatter;
+
+/// string value of date
+-(NSString *) stringValue: (NSDate*) date;
+
+/**
+ Update In Key Chain
+ - Parameter IdToken: String
+ - Parameter accessToken: String
+ - Parameter refreshToken: String
+ - Parameter expirationTime: Date
+ */
+-(void) updateInKeyChainWithIdToken:(NSString *)idToken accessToken:(NSString *)accessToken refreshToken:(NSString *)refreshToken expirationTime:(NSDate * _Nullable) expirationTime;
+
+/**
+ Set Name
+ - Parameter name: String
+ */
+- (void) setName:(NSString * _Nullable)name;
+
 /**
  Confirm a users' sign up with the confirmation code
  */
@@ -306,6 +327,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) AWSCognitoIdentityUserSessionToken * _Nullable refreshToken;
 @property (nonatomic, readonly) NSDate * _Nullable expirationTime;
 
+/**
+ Update
+ - Parameter IdToken: String
+ - Parameter accessToken: String
+ - Parameter refreshToken: String
+ - Parameter expirationTime: Date
+ */
+-(void) updateWithIdToken:(AWSCognitoIdentityUserSessionToken *)idToken accessToken:(AWSCognitoIdentityUserSessionToken *)accessToken refreshToken:(AWSCognitoIdentityUserSessionToken *)refreshToken expirationTime:(NSDate * _Nullable) expirationTime;
+
 @end
 
 /**
@@ -330,6 +360,13 @@ NS_ASSUME_NONNULL_BEGIN
  A Dictionary of claims in this token
  */
 @property (nonatomic, readonly) NSDictionary<NSString *, id> * tokenClaims;
+
+/**
+ Update
+ - Parameter tokenString: String
+ - Parameter tokenClaims: [String: Any]
+ */
+-(void) updateWithtokenString:(NSString *)tokenString tokenClaims:(NSDictionary<NSString *, id> * )tokenClaims;
 
 @end
 
