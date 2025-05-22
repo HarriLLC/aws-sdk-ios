@@ -178,6 +178,26 @@ typedef void (^AWSCognitoAuthSignOutBlock)(NSError * _Nullable error);
 
 - (void) updateUsernameAndPersistTokens: (AWSCognitoAuthUserSession *) session;
 
+/**
+ Get Id Token
+ */
+-(NSString * _Nullable) getIdToken;
+
+/**
+ Get Access Token
+ */
+-(NSString * _Nullable) getAccessToken;
+
+/**
+ Get Refresh Token
+ */
+-(NSString * _Nullable) getRefreshToken;
+
+/**
+ Get Expiration Date
+ */
+-(NSDate * _Nullable) getExpirationDate;
+
 @end
 
 /**

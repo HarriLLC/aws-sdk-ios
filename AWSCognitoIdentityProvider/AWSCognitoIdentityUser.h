@@ -105,6 +105,26 @@ NS_ASSUME_NONNULL_BEGIN
 -(void) updateInKeyChainWithIdToken:(NSString *)idToken accessToken:(NSString *)accessToken refreshToken:(NSString *)refreshToken expirationTime:(NSDate * _Nullable) expirationTime;
 
 /**
+ Get Id Token
+ */
+-(NSString * _Nullable) getIdToken;
+
+/**
+ Get Access Token
+ */
+-(NSString * _Nullable) getAccessToken;
+
+/**
+ Get Refresh Token
+ */
+-(NSString * _Nullable) getRefreshToken;
+
+/**
+ Get Expiration Date
+ */
+-(NSDate * _Nullable) getExpirationDate;
+
+/**
  Set Name
  - Parameter name: String
  */

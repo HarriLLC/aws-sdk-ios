@@ -96,6 +96,54 @@ static const NSString * AWSCognitoIdentityUserUserAttributePrefix = @"userAttrib
 }
 
 /**
+ Get Id Token
+ */
+-(NSString * _Nullable) getIdToken {
+
+    __block NSString * keyChainNamespace = [self keyChainNamespaceClientId];
+ 
+    NSString * idTokenKey = [self keyChainKey:keyChainNamespace key:AWSCognitoIdentityUserIdToken];
+
+    return self.pool.keychain[idTokenKey];
+}
+
+/**
+ Get Access Token
+ */
+-(NSString * _Nullable) getAccessToken {
+
+    __block NSString * keyChainNamespace = [self keyChainNamespaceClientId];
+ 
+    NSString * accessTokenKey = [self keyChainKey:keyChainNamespace key:AWSCognitoIdentityUserAccessToken];
+
+    return self.pool.keychain[accessTokenKey];
+}
+
+/**
+ Get Refresh Token
+ */
+-(NSString * _Nullable) getRefreshToken {
+
+    __block NSString * keyChainNamespace = [self keyChainNamespaceClientId];
+ 
+    NSString * refreshTokenKey = [self keyChainKey:keyChainNamespace key:AWSCognitoIdentityUserRefreshToken];
+    return self.pool.keychain[refreshTokenKey];
+}
+
+/**
+ Get Expiration Date
+ */
+-(NSDate * _Nullable) getExpirationDate {
+
+    __block NSString * keyChainNamespace = [self keyChainNamespaceClientId];
+ 
+    NSString * expirationTokenKey = [self keyChainKey:keyChainNamespace key:AWSCognitoIdentityUserTokenExpiration];
+   NSString * expirationDateString = self.pool.keychain[expirationTokenKey];
+    
+    return [[self getDateFormatter] dateFromString: expirationDateString];
+}
+
+/**
  Init
  - Parameter userNamr: String
  */

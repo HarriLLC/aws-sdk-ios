@@ -171,7 +171,6 @@ extension AWSMobileClient {
         }
         let federationProviderIdentifier = hostedUIOptions.federationProviderName
 
-        self.currentSession = HarriAWSSession(authSession: session, username: self.username, signInInfo: signInInfo, hostedUIOptions: hostedUIOptions)
         self.performHostedUISuccessfulSignInTasks(disableFederation: hostedUIOptions.disableFederation, session: session, federationToken: federationToken!, federationProviderIdentifier: federationProviderIdentifier, signInInfo: &signInInfo)
         self.mobileClientStatusChanged(userState: .signedIn, additionalInfo: signInInfo)
         completionHandler(.signedIn, nil)

@@ -1099,6 +1099,49 @@ withPresentingViewController:(UIViewController *)presentingViewController {
 }
 
 /**
+ Get Id Token
+ */
+-(NSString * _Nullable) getIdToken {
+
+    NSString * keyChainNamespace = [self keyChainNamespaceClientId:self.currentUsername];
+    NSString * idTokenKey = [self keyChainKey:keyChainNamespace key:AWSCognitoAuthUserIdToken];
+
+    return self.keychain[idTokenKey];
+}
+
+/**
+ Get Access Token
+ */
+-(NSString * _Nullable) getAccessToken {
+
+    NSString * keyChainNamespace = [self keyChainNamespaceClientId:self.currentUsername];
+    NSString * accessTokenKey = [self keyChainKey:keyChainNamespace key:AWSCognitoAuthUserAccessToken];
+    
+    return self.keychain[accessTokenKey];
+}
+
+/**
+ Get Refresh Token
+ */
+-(NSString * _Nullable) getRefreshToken {
+    NSString * keyChainNamespace = [self keyChainNamespaceClientId:self.currentUsername];
+    NSString * refreshTokenKey = [self keyChainKey:keyChainNamespace key:AWSCognitoAuthUserRefreshToken];
+    
+    return self.keychain[refreshTokenKey];
+}
+
+/**
+ Get Expiration Date
+ */
+-(NSDate * _Nullable) getExpirationDate {
+    NSString * keyChainNamespace = [self keyChainNamespaceClientId:self.currentUsername];
+    NSString * expirationTokenKey = [self keyChainKey:keyChainNamespace key:AWSCognitoAuthUserTokenExpiration];
+    NSString * expirationDateString = self.keychain[expirationTokenKey];
+    
+    return [self dateFromString:expirationDateString];
+}
+
+/**
  Get the device id if Advanced Security Feature is turned on
  */
 - (NSString *) asfDeviceId {
