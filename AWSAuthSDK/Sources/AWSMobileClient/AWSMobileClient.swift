@@ -70,7 +70,7 @@ final public class AWSMobileClient: _AWSMobileClient {
         
         if self.scopes != nil {
             
-            let hostedUIOptions = HostedUIOptions(disableFederation: self.federationDisabled, scopes: self.scopes, identityProvider: nil, idpIdentifier: nil, federationProviderName: nil, signInURIQueryParameters: self.signInURIQueryParameters, tokenURIQueryParameters: self.tokenURIQueryParameters, signOutURIQueryParameters: self.signOutURIQueryParameters, signInPrivateSession: true)
+            let hostedUIOptions = HostedUIOptions(disableFederation: self.federationDisabled, scopes: self.scopes, identityProvider: nil, idpIdentifier: nil, federationProviderName: nil, signInURIQueryParameters: self.signInURIQueryParameters, signOutURIQueryParameters: self.signOutURIQueryParameters, signInPrivateSession: true)
             
             var signInInfo = [String: String]()
             
