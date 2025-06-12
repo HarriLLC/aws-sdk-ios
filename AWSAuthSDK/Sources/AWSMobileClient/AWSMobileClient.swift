@@ -33,7 +33,6 @@ final public class AWSMobileClient: _AWSMobileClient {
     internal var customRoleArnInternal: String? = nil
     
     internal var signInURIQueryParameters: [String: String]? = nil
-    internal var tokenURIQueryParameters: [String: String]? = nil
     internal var signOutURIQueryParameters: [String: String]? = nil
     internal var scopes: [String]? = nil
 
@@ -509,9 +508,6 @@ final public class AWSMobileClient: _AWSMobileClient {
         }
 
         let tokensURI = infoDictionary?["TokenURI"] as? String
-        if self.tokenURIQueryParameters == nil {
-            self.tokenURIQueryParameters = infoDictionary?["TokenURIQueryParameters"] as? [String: String]
-        }
 
         guard
             let clientId = clientId,
@@ -537,7 +533,6 @@ final public class AWSMobileClient: _AWSMobileClient {
             tokensUri: tokensURI,
             signInUriQueryParameters: self.signInURIQueryParameters,
             signOutUriQueryParameters: self.signOutURIQueryParameters,
-            tokenUriQueryParameters: self.tokenURIQueryParameters,
             userPoolServiceConfiguration: AWSMobileClient.serviceConfiguration?.userPoolServiceConfiguration,
             signInPrivateSession: false)
 
