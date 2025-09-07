@@ -77,7 +77,11 @@ NS_ASSUME_NONNULL_BEGIN
                                                        password:(NSString *)password
                                                  userAttributes:(nullable NSArray<AWSCognitoIdentityUserAttributeType *> *)userAttributes
                                                  validationData:(nullable NSArray<AWSCognitoIdentityUserAttributeType *> *)validationData;
-
+/**
+ Set current user
+ - Parameter username: String
+ */
+- (void) setCurrentUser:(NSString *) username;
 
 /**
  Return the user who last authenticated.  Username may be nil if current user is unknown.

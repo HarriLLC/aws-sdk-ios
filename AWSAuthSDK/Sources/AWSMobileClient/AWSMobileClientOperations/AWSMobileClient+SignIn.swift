@@ -229,6 +229,9 @@ extension AWSMobileClient {
     }
 
     internal func performUserPoolSuccessfulSignInTasks(session: AWSCognitoIdentityUserSession) {
+        
+        self.currentSession = HarriAWSSession(session: session, username: self.username)
+        
         let tokenString = session.idToken!.tokenString
         self.developerNavigationController = nil
         self.cachedLoginsMap = [self.userPoolClient!.identityProviderName: tokenString]

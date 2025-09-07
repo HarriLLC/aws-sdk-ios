@@ -171,12 +171,13 @@ extension AWSMobileClient {
         }
         let federationProviderIdentifier = hostedUIOptions.federationProviderName
 
+        self.currentSession = HarriAWSSession(authSession: session, username: self.username, signInInfo: signInInfo, hostedUIOptions: hostedUIOptions)
         self.performHostedUISuccessfulSignInTasks(disableFederation: hostedUIOptions.disableFederation, session: session, federationToken: federationToken!, federationProviderIdentifier: federationProviderIdentifier, signInInfo: &signInInfo)
         self.mobileClientStatusChanged(userState: .signedIn, additionalInfo: signInInfo)
         completionHandler(.signedIn, nil)
     }
 
-    private func performHostedUISuccessfulSignInTasks(disableFederation: Bool = false,
+    internal func performHostedUISuccessfulSignInTasks(disableFederation: Bool = false,
                                                        session: AWSCognitoAuthUserSession,
                                                        federationToken: String,
                                                        federationProviderIdentifier: String? = nil,
@@ -191,7 +192,7 @@ extension AWSMobileClient {
                                                additionalInfo: signInInfo)
     }
 
-    private func configureAndRegisterCognitoAuth(hostedUIOptions: HostedUIOptions,
+    internal func configureAndRegisterCognitoAuth(hostedUIOptions: HostedUIOptions,
                                                  _ completionHandler: @escaping(UserState?, Error?) -> Void) {
         loadOAuthURIQueryParametersFromKeychain()
 

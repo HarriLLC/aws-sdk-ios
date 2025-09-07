@@ -176,6 +176,7 @@ typedef void (^AWSCognitoAuthSignOutBlock)(NSError * _Nullable error);
             openURL:(NSURL *)url
             options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options;
 
+- (void) updateUsernameAndPersistTokens: (AWSCognitoAuthUserSession *) session;
 
 @end
 
@@ -335,6 +336,15 @@ typedef void (^AWSCognitoAuthSignOutBlock)(NSError * _Nullable error);
  */
 @property (nonatomic, readonly, nullable) NSString * username;
 
+/**
+ Update
+ - Parameter IdToken: String
+ - Parameter accessToken: String
+ - Parameter refreshToken: String
+ - Parameter expirationTime: Date
+ */
+-(void) updateWithIdToken:(AWSCognitoAuthUserSessionToken *)idToken accessToken:(AWSCognitoAuthUserSessionToken *)accessToken refreshToken:(AWSCognitoAuthUserSessionToken *)refreshToken expirationTime:(NSDate * _Nullable) expirationTime;
+
 @end
 
 /**
@@ -351,6 +361,13 @@ typedef void (^AWSCognitoAuthSignOutBlock)(NSError * _Nullable error);
  The claims from the token
  **/
 @property (nonatomic, readonly) NSDictionary * claims;
+
+/**
+ Update
+ - Parameter tokenString: String
+ - Parameter tokenClaims: [String: Any]
+ */
+-(void) updateWithtokenString:(NSString *)tokenString tokenClaims:(NSDictionary<NSString *, id> *)tokenClaims;
 
 @end
 
