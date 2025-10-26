@@ -68,7 +68,7 @@ final public class AWSMobileClient: _AWSMobileClient {
      */
     func getAWSLocalSession() -> HarriAWSSession? {
         
-        if self.scopes != nil {
+        if self.federationProvider == .hostedUI {
             
             let hostedUIOptions = HostedUIOptions(disableFederation: self.federationDisabled, scopes: self.scopes, identityProvider: nil, idpIdentifier: nil, federationProviderName: nil, signInURIQueryParameters: self.signInURIQueryParameters, signOutURIQueryParameters: self.signOutURIQueryParameters, signInPrivateSession: true)
             
