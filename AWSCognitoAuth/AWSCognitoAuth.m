@@ -84,7 +84,7 @@ API_AVAILABLE(ios(13.0))
 
 @implementation AWSCognitoAuth
 
-NSString *const AWSCognitoAuthSDKVersion = @"2.40.1";
+NSString *const AWSCognitoAuthSDKVersion = @"2.41.0";
 
 
 static NSMutableDictionary *_instanceDictionary = nil;
@@ -1099,6 +1099,49 @@ withPresentingViewController:(UIViewController *)presentingViewController {
 }
 
 /**
+ Get Id Token
+ */
+-(NSString * _Nullable) getIdToken {
+
+    NSString * keyChainNamespace = [self keyChainNamespaceClientId:self.currentUsername];
+    NSString * idTokenKey = [self keyChainKey:keyChainNamespace key:AWSCognitoAuthUserIdToken];
+
+    return self.keychain[idTokenKey];
+}
+
+/**
+ Get Access Token
+ */
+-(NSString * _Nullable) getAccessToken {
+
+    NSString * keyChainNamespace = [self keyChainNamespaceClientId:self.currentUsername];
+    NSString * accessTokenKey = [self keyChainKey:keyChainNamespace key:AWSCognitoAuthUserAccessToken];
+    
+    return self.keychain[accessTokenKey];
+}
+
+/**
+ Get Refresh Token
+ */
+-(NSString * _Nullable) getRefreshToken {
+    NSString * keyChainNamespace = [self keyChainNamespaceClientId:self.currentUsername];
+    NSString * refreshTokenKey = [self keyChainKey:keyChainNamespace key:AWSCognitoAuthUserRefreshToken];
+    
+    return self.keychain[refreshTokenKey];
+}
+
+/**
+ Get Expiration Date
+ */
+-(NSDate * _Nullable) getExpirationDate {
+    NSString * keyChainNamespace = [self keyChainNamespaceClientId:self.currentUsername];
+    NSString * expirationTokenKey = [self keyChainKey:keyChainNamespace key:AWSCognitoAuthUserTokenExpiration];
+    NSString * expirationDateString = self.keychain[expirationTokenKey];
+    
+    return [self dateFromString:expirationDateString];
+}
+
+/**
  Get the device id if Advanced Security Feature is turned on
  */
 - (NSString *) asfDeviceId {
@@ -1358,7 +1401,6 @@ withPresentingViewController:(UIViewController *)presentingViewController {
                                    tokensUri:[NSString stringWithFormat:@"%@/oauth2/token",webDomain]
                     signInUriQueryParameters:@{}
                    signOutUriQueryParameters:@{@"client_id": appClientId, @"logout_uri": signOutRedirectUri}
-                     tokenUriQueryParameters:@{}
                           isProviderExternal:NO];
 }
 
@@ -1377,7 +1419,6 @@ withPresentingViewController:(UIViewController *)presentingViewController {
                                   tokensUri:(NSString *) tokensUri
                    signInUriQueryParameters:(NSDictionary<NSString *, NSString *> *) signInUriQueryParameters
                   signOutUriQueryParameters:(NSDictionary<NSString *, NSString *> *) signOutUriQueryParameters
-                    tokenUriQueryParameters:(NSDictionary<NSString *, NSString *> *) tokenUriQueryParameters
                          isProviderExternal:(BOOL) isProviderExternal {
 
     return [self initWithAppClientIdInternal:appClientId
@@ -1395,10 +1436,9 @@ withPresentingViewController:(UIViewController *)presentingViewController {
                                    tokensUri:tokensUri
                     signInUriQueryParameters:signInUriQueryParameters
                    signOutUriQueryParameters:signOutUriQueryParameters
-                     tokenUriQueryParameters:tokenUriQueryParameters
-                          isProviderExternal:isProviderExternal
-                cognitoUserPoolServiceConfig:nil
-                        signInPrivateSession:NO];
+                         isProviderExternal:isProviderExternal
+               cognitoUserPoolServiceConfig:nil
+                       signInPrivateSession:NO];
 }
 
 - (instancetype)initWithAppClientIdInternal:(NSString *) appClientId
@@ -1416,7 +1456,6 @@ withPresentingViewController:(UIViewController *)presentingViewController {
                                   tokensUri:(NSString *) tokensUri
                    signInUriQueryParameters:(NSDictionary<NSString *, NSString *> *) signInUriQueryParameters
                   signOutUriQueryParameters:(NSDictionary<NSString *, NSString *> *) signOutUriQueryParameters
-                    tokenUriQueryParameters:(NSDictionary<NSString *, NSString *> *) tokenUriQueryParameters
                          isProviderExternal:(BOOL) isProviderExternal
                cognitoUserPoolServiceConfig:(nullable AWSServiceConfiguration *) serviceConfig
                        signInPrivateSession:(BOOL)isSignInPrivateSession {
@@ -1445,7 +1484,7 @@ withPresentingViewController:(UIViewController *)presentingViewController {
         _userPoolId = userPoolIdForEnablingASF;
         _isSFAuthenticationSessionEnabled = enableSFAuthSession;
         _signInUriQueryParameters = signInUriQueryParameters;
-        _tokensUriQueryParameters = tokenUriQueryParameters;
+        _tokensUriQueryParameters = @{};
         _isAuthProviderExternal = isProviderExternal;
         _userPoolConfig = serviceConfig;
         _isSignInPrivateSession = isSignInPrivateSession;
@@ -1472,7 +1511,6 @@ withPresentingViewController:(UIViewController *)presentingViewController {
                                                                                                       tokensUri:self.tokensUri
                                                                                        signInUriQueryParameters:self.signInUriQueryParameters
                                                                                       signOutUriQueryParameters:self.signOutUriQueryParameters
-                                                                                        tokenUriQueryParameters:self.tokensUriQueryParameters
                                                                                              isProviderExternal:self.isAuthProviderExternal
                                                                                    cognitoUserPoolServiceConfig:self.userPoolConfig
                                                                                            signInPrivateSession:self.isSignInPrivateSession];

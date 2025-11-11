@@ -171,7 +171,6 @@ extension AWSMobileClient {
         }
         let federationProviderIdentifier = hostedUIOptions.federationProviderName
 
-        self.currentSession = HarriAWSSession(authSession: session, username: self.username, signInInfo: signInInfo, hostedUIOptions: hostedUIOptions)
         self.performHostedUISuccessfulSignInTasks(disableFederation: hostedUIOptions.disableFederation, session: session, federationToken: federationToken!, federationProviderIdentifier: federationProviderIdentifier, signInInfo: &signInInfo)
         self.mobileClientStatusChanged(userState: .signedIn, additionalInfo: signInInfo)
         completionHandler(.signedIn, nil)
@@ -217,10 +216,7 @@ extension AWSMobileClient {
         }
 
         let tokensURI = infoDictionary?["TokenURI"] as? String
-        if self.tokenURIQueryParameters == nil {
-            self.tokenURIQueryParameters = infoDictionary?["TokenURIQueryParameters"] as? [String: String]
-        }
-
+        
         let identityProvider = hostedUIOptions.identityProvider
         let idpIdentifier = hostedUIOptions.idpIdentifier
 
@@ -233,10 +229,6 @@ extension AWSMobileClient {
 
         if hostedUIOptions.signInURIQueryParameters != nil {
             self.signInURIQueryParameters = hostedUIOptions.signInURIQueryParameters
-        }
-
-        if hostedUIOptions.tokenURIQueryParameters != nil {
-            self.tokenURIQueryParameters = hostedUIOptions.tokenURIQueryParameters
         }
 
         if hostedUIOptions.signOutURIQueryParameters != nil {
@@ -262,7 +254,6 @@ extension AWSMobileClient {
                                          tokensUri: tokensURI,
                                          signInUriQueryParameters: self.signInURIQueryParameters,
                                          signOutUriQueryParameters: self.signOutURIQueryParameters,
-                                         tokenUriQueryParameters: self.tokenURIQueryParameters,
                                          userPoolServiceConfiguration: AWSMobileClient.serviceConfiguration?.userPoolServiceConfiguration,
                                          signInPrivateSession: hostedUIOptions.signInPrivateSession)
 

@@ -136,6 +136,10 @@
 		5C3324972773F43400F2C47B /* AWSMobileClientDeleteUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3324962773F43400F2C47B /* AWSMobileClientDeleteUserTests.swift */; };
 		68B1317829A95E6400E3B3BC /* WeakHashTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B1317729A95E6400E3B3BC /* WeakHashTable.swift */; };
 		68B1317929A95E6400E3B3BC /* WeakHashTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B1317729A95E6400E3B3BC /* WeakHashTable.swift */; };
+		8619E5172DDF64FA00EA0481 /* HarriAWSSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8619E5162DDF64F500EA0481 /* HarriAWSSession.swift */; };
+		8619E5182DDF64FA00EA0481 /* HarriAWSSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8619E5162DDF64F500EA0481 /* HarriAWSSession.swift */; };
+		8619E51A2DDF652800EA0481 /* HarriCognitoIdentityUserSessionToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8619E5192DDF650E00EA0481 /* HarriCognitoIdentityUserSessionToken.swift */; };
+		8619E51B2DDF652800EA0481 /* HarriCognitoIdentityUserSessionToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8619E5192DDF650E00EA0481 /* HarriCognitoIdentityUserSessionToken.swift */; };
 		B402CD1F2580672F0020B83B /* _AWSMobileClient.h in Headers */ = {isa = PBXBuildFile; fileRef = B5FC69031FAFA1AA004790CB /* _AWSMobileClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B402CD202580672F0020B83B /* AWSCognitoAuth_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 177B8AD921E52C730051068F /* AWSCognitoAuth_Internal.h */; };
 		B402CD212580672F0020B83B /* AWSCognitoAuthUICKeyChainStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 177B8ADB21E52C730051068F /* AWSCognitoAuthUICKeyChainStore.h */; };
@@ -1534,6 +1538,8 @@
 		5C3324962773F43400F2C47B /* AWSMobileClientDeleteUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSMobileClientDeleteUserTests.swift; sourceTree = "<group>"; };
 		68B1317729A95E6400E3B3BC /* WeakHashTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakHashTable.swift; sourceTree = "<group>"; };
 		6BB7BF2E23E5E8FB0026E789 /* AWSMobileClient-Mixed-Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AWSMobileClient-Mixed-Swift.h"; sourceTree = "<group>"; };
+		8619E5162DDF64F500EA0481 /* HarriAWSSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarriAWSSession.swift; sourceTree = "<group>"; };
+		8619E5192DDF650E00EA0481 /* HarriCognitoIdentityUserSessionToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarriCognitoIdentityUserSessionToken.swift; sourceTree = "<group>"; };
 		B402CD3F2580672F0020B83B /* AWSMobileClientXCF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AWSMobileClientXCF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B402D00725815C550020B83B /* AWSMobileClientXCF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSMobileClientXCF.h; sourceTree = "<group>"; };
 		B402D0D225815D690020B83B /* AWSMobileClientXCF-Mixed-Swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AWSMobileClientXCF-Mixed-Swift.h"; sourceTree = "<group>"; };
@@ -2163,6 +2169,15 @@
 			path = AWSAuthSDKTestApp;
 			sourceTree = "<group>";
 		};
+		8619E49E2DDF64EC00EA0481 /* HarriAWSSession */ = {
+			isa = PBXGroup;
+			children = (
+				8619E5192DDF650E00EA0481 /* HarriCognitoIdentityUserSessionToken.swift */,
+				8619E5162DDF64F500EA0481 /* HarriAWSSession.swift */,
+			);
+			path = HarriAWSSession;
+			sourceTree = "<group>";
+		};
 		B412F5EE2334783D00F1AC69 /* AWSMobileClientCustomAuthTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -2540,6 +2555,7 @@
 		B5FC69021FAFA1AA004790CB /* AWSMobileClient */ = {
 			isa = PBXGroup;
 			children = (
+				8619E49E2DDF64EC00EA0481 /* HarriAWSSession */,
 				214609992B88FB2D002FCE7B /* PrivacyInfo.xcprivacy */,
 				B5FC69041FAFA1AA004790CB /* Info.plist */,
 				170AD35221921764004E1E88 /* AWSMobileClient.h */,
@@ -4304,11 +4320,13 @@
 				B43CB22B27C7158C00968F10 /* AWSMobileClient+UserAttributes.swift in Sources */,
 				B4497A3B27D16A81009FA751 /* FetchUserPoolTokensOperation.swift in Sources */,
 				B4BC91D427C6F7C000354EB5 /* FederationProvider.swift in Sources */,
+				8619E51B2DDF652800EA0481 /* HarriCognitoIdentityUserSessionToken.swift in Sources */,
 				B43CB21027C70B1C00968F10 /* SessionToken.swift in Sources */,
 				B43CB16F27C6F90C00968F10 /* SignInUIOptions.swift in Sources */,
 				B402CD332580672F0020B83B /* AWSCognitoAuth.m in Sources */,
 				B43CB23B27C71BDB00968F10 /* AWSMobileClient+Tokens.swift in Sources */,
 				B43CB2C227C7230F00968F10 /* UpdateDeviceStatusResult.swift in Sources */,
+				8619E5172DDF64FA00EA0481 /* HarriAWSSession.swift in Sources */,
 				B43CB21627C7105800968F10 /* AWSMobileClient+SignUp.swift in Sources */,
 				B43CB21927C7120400968F10 /* AWSMobileClient+SignOut.swift in Sources */,
 				68B1317929A95E6400E3B3BC /* WeakHashTable.swift in Sources */,
@@ -4436,11 +4454,13 @@
 				B43CB22A27C7158C00968F10 /* AWSMobileClient+UserAttributes.swift in Sources */,
 				B4497A3A27D16A81009FA751 /* FetchUserPoolTokensOperation.swift in Sources */,
 				B4BC91D327C6F7C000354EB5 /* FederationProvider.swift in Sources */,
+				8619E51A2DDF652800EA0481 /* HarriCognitoIdentityUserSessionToken.swift in Sources */,
 				B43CB20F27C70B1B00968F10 /* SessionToken.swift in Sources */,
 				B43CB16E27C6F90C00968F10 /* SignInUIOptions.swift in Sources */,
 				177B8ADC21E52C730051068F /* AWSCognitoAuth.m in Sources */,
 				B43CB23A27C71BDB00968F10 /* AWSMobileClient+Tokens.swift in Sources */,
 				B43CB2C127C7230F00968F10 /* UpdateDeviceStatusResult.swift in Sources */,
+				8619E5182DDF64FA00EA0481 /* HarriAWSSession.swift in Sources */,
 				B43CB21527C7105800968F10 /* AWSMobileClient+SignUp.swift in Sources */,
 				B43CB21827C7120400968F10 /* AWSMobileClient+SignOut.swift in Sources */,
 				68B1317829A95E6400E3B3BC /* WeakHashTable.swift in Sources */,
